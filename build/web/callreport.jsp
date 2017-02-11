@@ -6,7 +6,7 @@
 <%
 String method = request.getMethod().toUpperCase();
 String name = "";
-StringBuffer msg = new StringBuffer("");
+
 try{    
  name = ((String) session.getAttribute("username")).trim();
 }catch(Exception e){
@@ -18,7 +18,7 @@ try{
 
  if(method.equals( "POST" )) {
     try{ 
-        int count1 =0, count2 = 0, count3 = 0, count4 = 0;
+        int count1 =0;
         Connection connect = null;   
         DBConnection con = new DBConnection(); 
         connect = con.getConnection();
@@ -39,39 +39,45 @@ try{
         String question1            = request.getParameter("question1").trim();
         String question2            = request.getParameter("question2").trim();
         String question3            = request.getParameter("question3").trim();
-        String question4            = "something";
-        String question5            = "something";
+        String question4            = request.getParameter("question3").trim();
+        String question5            = request.getParameter("question3").trim();
         String summary              = request.getParameter("scope").trim();
+        String requested_for        = request.getParameter("requested_for").trim();
+        String budget               = request.getParameter("budget").trim();
         if(!storeName.equals("") && 
             !storeContactPerson.equals("") && 
             storeNumber != 0 ){
-            String insertStore = "INSERT INTO store(STORENAME, STORENUMBER, STORECONTACTPERSON) values('"+storeName+"', '" +storeNumber+"' , '"+ storeContactPerson+"')";
-            count1 = st.executeUpdate(insertStore);
-        }
-        if(!customerName.equals("") && 
-            primaryNumber != 0 && 
-            alternateNumber != 0){
-            String insertCustomer = "INSERT INTO CUSTOMER(CUSTOMERNAME, CSNUMBER, CSALTNUMER) values('"+customerName+"' , ' " + primaryNumber +"', '" + alternateNumber+"')";
-            count2 = st.executeUpdate(insertCustomer);
-        }
-        if( !nameOfSalesPerson.equals("") && 
-            salesPersonId != 0 && 
-            !dateCalledIn.equals("") && 
-            !timeCalledIn.equals("")){
-            String insertSale = "INSERT INTO SALE(NAMEOFSP, SPID, TIMECALLEDIN, DATECALLEDIN, FOLLOWUPCALL, DOAPPOINTMENT, SUMMARY ) values('"+nameOfSalesPerson+"', '"+ salesPersonId + "', '" +timeCalledIn+"', '"+ dateCalledIn+"',  '"+followUpCall+"', '"+dateOfApp+"', '"+summary+"')";
-            count3 = st.executeUpdate(insertSale);
-        }
-        if(!question1.equals("") && 
-               !question2.equals("") && 
-               !question3.equals("")){
-                String insertQuestion = "INSERT INTO QUESTIONNAIRE(QUESTION1, QUESTION2, QUESTION3, QUESTION4, QUESTION5) values('"+question1+"', '"+ question2+"' , '" +question3+"', '"+question4+"', '"+question5+"' )";
-                count4 = st.executeUpdate(insertQuestion);
+            String insertCallreport = "INSERT INTO callreport(store_name, store_number, store_contact_person,"
+                                       + "customer_name, customer_number, customer_alt_number, question1, "
+                                       + "question2, question3, question4, question5, name_of_sp, sales_person_id,"
+                                       + "timecalled_in, datecalled_in, follow_up_call, requested_for, budget,"
+                                       + " date_of_appointment, summary)"
+                                       +"values('"+storeName+"', '" +storeNumber+"', '"+ storeContactPerson
+                                       +"', '"+customerName+"', '" +primaryNumber+"' , '"+ alternateNumber
+                                       + "', '"+question1+"', '" +question2+"' , '"+ question3
+                                       +"', '"+question4+"', '" +question5+"' , '"+ nameOfSalesPerson
+                                       +"', '"+salesPersonId+"', '" +timeCalledIn+"' , '"+ dateCalledIn
+                                       +"', '"+followUpCall+"', '" +requested_for+"', '" +budget
+                                       +"', '"+dateOfApp+"' , '"+ summary+"')";
+            count1 = st.executeUpdate(insertCallreport);
+            ResultSet rs = st.executeQuery("select last_insert_id() as last_id from callreport");
+            while(rs.next()){
+                int lastid = rs.getInt("last_id");
             }
+            
+        }
 
-        if(count1 != 0 && count2 != 0 && count3 != 0 && count4 != 0 ){
-            msg.append("Details updated successfully");
+        if(count1 != 0){
+%>
+            <script type="text/javascript">alert("Details updated successfully");</script>
+<%
         }else{
-            msg.append("Details not updated successfully");
+            connect.setAutoCommit(false);
+            connect.rollback();
+            connect.commit();
+%>
+            <script type="text/javascript">alert("Details not updated successfully");</script>
+<%
         }        
     }catch(Exception e){
         System.out.println("<p>Exception Occured in callreport try2 : "+e.toString()+"</p>");
@@ -93,18 +99,12 @@ if(!name.equals( null )) {
             </head>
             <body>
             <%@include file="menubar.jsp" %>
-                <% if ( msg.equals("")){ %>
-
-                <% }else { %>
-            <center><span class = "msg" ><%= msg %></span></center>
-                <% } %>
                 <form action="callreport.jsp" method="post">
                         <!-- ============================== Fieldset 1 ============================== -->
-                        <fieldset>
-                            <legend>R-F-Q</legend>
+                        <span style="position:absolute; top:44px; right:2px">
                                 <label for="input-one" class="float"><strong>Get RFQ</strong></label><br />
                                 <input class="inp-text" name="rfq" id="input-one" type="text" size="30" onchange="getrfq(this.value)" /><br />
-                        </fieldset>
+                        </span>
                         <fieldset>
                                 <legend>Store Information</legend>
                                         <label for="input-one" class="float"><strong>Store Name</strong></label><br />
@@ -151,6 +151,12 @@ if(!name.equals( null )) {
 
                                         <label for="input-two" class="float"><strong>Question3</strong></label><br />
                                         <input style="padding : 20px;" id = "question3" class="inp-text" name="question3" type="text" size="30" />
+                                        
+                                        <label for="input-two" class="float"><strong>Question4</strong></label><br />
+                                        <input style="padding : 20px;" id = "question4" class="inp-text" name="question4" type="text" size="30" />
+                                        
+                                        <label for="input-two" class="float"><strong>Question5</strong></label><br />
+                                        <input style="padding : 20px;" id = "question5" class="inp-text" name="question5" type="text" size="30" />
                         </fieldset>
                         <!-- ============================== Fieldset 1 end ============================== -->
 
@@ -159,20 +165,20 @@ if(!name.equals( null )) {
                         <fieldset>
                                 <legend>Miscellaneous</legend>
                                 <label for="input-two" class="float"><strong>Requested For</strong></label>
-                                <select style="width:145px;">
-                                        <option for="option1">Main Bathroom</option>
-                                        <option for="option2">Ensuit Bathroom</option>
-                                        <option for="option3">Powder Room</option>
-                                        <option for="option4">Kitchen</option>
-                                        <option for="option5">Basement</option>
+                                <select style="width:145px;" name="requested_for">
+                                        <option for="option1" value="Main Bathroom">Main Bathroom</option>
+                                        <option for="option2" value="Ensuit Bathroom">Ensuit Bathroom</option>
+                                        <option for="option3" value="Powder Room">Powder Room</option>
+                                        <option for="option4" value="Kitchen">Kitchen</option>
+                                        <option for="option5" value="Basement">Basement</option>
                                 </select><br />
                                 <label for="input-two" class="float"><strong>Budget</strong></label>
-                                <select style = "float:left; width: 145px;">
-                                        <option for="option1">5000-7000</option>
-                                        <option for="option2">7000-9000</option>
-                                        <option for="option3">9000-12000</option>
-                                        <option for="option4">12000-15000</option>
-                                        <option for="option5">15000 and Above</option>
+                                <select style = "float:left; width: 145px;" name="budget">
+                                        <option for="option1" value="5000-7000">5000-7000</option>
+                                        <option for="option2" value="7000-9000">7000-9000</option>
+                                        <option for="option3" value="9000-12000">9000-12000</option>
+                                        <option for="option4" value="12000-15000">12000-15000</option>
+                                        <option for="option5" value="15000 and above">15000 and Above</option>
                                 </select><br />
                                 <label for="input-two" class="float"><strong>Follow Up Call</strong></label><br />
                                 <input class="inp-text" name="follow_up_call"  id="follow_up_call" type="text" size="30" />
