@@ -19,9 +19,8 @@ try{
  if(method.equals( "POST" )) {
     try{ 
         int count1 =0;
-        Connection connect = null;   
-        DBConnection con = new DBConnection(); 
-        connect = con.getConnection();
+        Connection connect = null;    
+        connect = DBConnection.getConnection();
         Statement st = connect.createStatement();
 
         String storeName            = request.getParameter("store_name").trim();

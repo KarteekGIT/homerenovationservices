@@ -26,7 +26,12 @@ public class DBConnection {
             System.out.println("Exception occured in DBConnection : " +e);
         }
     }
-    public Connection getConnection(){
+
+    /**
+     *
+     * @return
+     */
+    public static Connection getConnection(){
         return connect;
     }
 }

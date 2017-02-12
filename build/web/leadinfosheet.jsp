@@ -15,9 +15,8 @@ try{
 if(method.equals( "POST" )) {
     try{ 
         int count1 =0;
-        Connection connect = null;   
-        DBConnection con = new DBConnection(); 
-        connect = con.getConnection();
+        Connection connect = null;    
+        connect = DBConnection.getConnection();
         Statement st = connect.createStatement();
 
         String storeName                = request.getParameter("store_name").trim();
@@ -49,7 +48,7 @@ if(method.equals( "POST" )) {
         
         if(!storeName.equals("") && 
             !department.equals("") && 
-            storeNumber.equals("") ){
+            !storeNumber.equals("") ){
             String insertleadinfo = "INSERT INTO leadinfosheet(store_name, store_number, department,"
                                        + "email, primary_contact_name, primary_contact_number, extension, "
                                        + "fax, store_address, customer_id, customer_name, customer_extension, customer_primary_number,"
@@ -64,8 +63,9 @@ if(method.equals( "POST" )) {
                                        +"', '"+custPriNumber+"', '" +custAltNumber+"' , '"+ custAdress
                                        +"', '"+typeOfDwell+"', '" +singleSemi+"', '" +siteId
                                        +"', '"+siteContactName+"', '"+ siteExtension+"','"+sitePrimNumber
-                                       +"', '"+siteAltNumber+"', '"+siteAddress+"', '"+townHouse+"','"+highRiseTriplex
+                                       +"', '"+siteAltNumber+"', '"+siteAddress+"', '"+townHouse+"', '"+highRiseTriplex
                                        +"', '"+summary+"')";
+
             count1 = st.executeUpdate(insertleadinfo);
             ResultSet rs = st.executeQuery("select last_insert_id() as last_id from callreport");
             while(rs.next()){
@@ -91,6 +91,11 @@ if(method.equals( "POST" )) {
     }  
 }
 if(!name.equals( null )) {
+java.util.Date date = new java.util.Date();
+String d = date.toString();
+String dat = d.substring(0, 11);
+String time = d.substring(11, 16);
+String year = d.substring(24);
 %>
 
 <!DOCTYPE html>
@@ -107,6 +112,15 @@ if(!name.equals( null )) {
             <%@include file="menubar.jsp" %>
         </div>
         <form action="leadinfosheet.jsp" method="post">
+                <span style="position:absolute; top:44px; right:2px">
+                    <label for="input-one" class="float"><strong>Get RFQ</strong></label><br />
+                    <input class="inp-text" name="rfq" id="input-one" type="text" size="30" onchange="getrfq(this.value)" /><br />
+                    
+                    <label for="input-one" class="float"><strong>Date</strong></label><br />
+                    <p><b><span><%= dat %></span>&nbsp;&nbsp;<span><%= year %></span></b></p>
+                    <p><%= time %></p>
+                    <br />
+                </span>
 		<!-- ============================== Fieldset 1 ============================== -->
 		<fieldset>
 			<legend>Store Information</legend>

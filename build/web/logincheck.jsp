@@ -11,9 +11,8 @@
     String pwd = "";
 
     Connection connect = null;
-try{
-        DBConnection con = new DBConnection(); 
-        connect = con.getConnection();
+try{ 
+        connect = DBConnection.getConnection();
         String query = "SELECT Email, Password FROM Login";
         Statement st = connect.createStatement();
         ResultSet rs = st.executeQuery(query);
