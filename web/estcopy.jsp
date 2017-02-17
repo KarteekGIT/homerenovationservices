@@ -9,7 +9,7 @@
                 <link rel="stylesheet" type="text/css" href="css/menubar.css">
                 <script type="text/javascript" src="js/getrfq.js"></script>
                 <style>
-                    div {padding: 0px 0px 12px 0px;}
+                    div {padding: 0px 0px 15px 0px;}
                     div {border: solid black 1px;}
                 </style>    
             </head>
@@ -181,7 +181,7 @@
                                 </select><br /><br />
                             </div>
                             <div>    
-                                <label for="input-two" class="float"><strong>Changing/Replacing Electricals</strong></label>
+                                <label for="input-two" class="float"><strong>Change/Replace Electricals</strong></label>
                                 <input type="checkbox" name="crele" value="fixtures" />Fixtures &nbsp;&nbsp;
                                 <input type="checkbox" name="crele" value="switches" />Switches &nbsp;&nbsp;
                                 <input type="checkbox" name="crele" value="plugs" />Plugs &nbsp;&nbsp;<br /><br />
