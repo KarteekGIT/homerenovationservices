@@ -9,9 +9,9 @@ String name = "";
 
 try{    
  name = ((String) session.getAttribute("username")).trim();
-}catch(Exception e){
+}catch(NullPointerException e){
 %>
-<p>An error occurred please in callreport <a href="index.jsp">Login</a>  
+<p>An error occurred in callreport please <a href="index.jsp">Login</a>  
 <%
     return;
 }
@@ -196,8 +196,8 @@ if(!name.equals( null )) {
                         </fieldset>
                         <!-- ============================== Fieldset 3 end ============================== -->
 
-                        <p><input class="submit-button" type="submit" name="update" value="update" />
-                            <a class="submit-button" href="logout.jsp" >Logout</a></p>
+                        <p><input class="submit-button" type="submit" name="update" value="Update" />
+                            <input type="button" onClick="location.href='logout.jsp';" value="Logout" /></p>
                 </form>
             <span id="setrfq" style="display:none;"></span>
 
