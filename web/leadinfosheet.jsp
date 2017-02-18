@@ -6,7 +6,7 @@ String method = request.getMethod().toUpperCase();
 String name = "";
 try{    
  name = ((String) session.getAttribute("username")).trim();
-}catch(Exception e){
+}catch(NullPointerException e){
 %>
 <p>An error occurred in leadinfosheet please <a href="index.jsp">Login</a>  
 <%
