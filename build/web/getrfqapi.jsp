@@ -1,14 +1,10 @@
-<%-- 
-    Document   : getrfqapi
-    Created on : 30-Jan-2017, 9:45:15 AM
-    Author     : praveen
---%>
+
 <%@page import = "com.connection.DBConnection" %>
 <%@page import = "java.sql.*" %>
 <%
   int spid = 0, snumber = 0;
   String cname="", cnumber="", calt="", spname="", timecin="", datecin="", folupcall="", doap="";
-  String summary="", sname="", scperson="", ques1="", ques2="", ques3="";
+  String summary="", sname="", scperson="", ques1="", ques2="", ques3="", ques4="", ques5="";
   int rfq = Integer.parseInt(request.getParameter("rfq").trim());
   out.print(rfq);
   session.setAttribute("rfq", rfq);
@@ -19,32 +15,28 @@
         connect = con.getConnection();
 
             Statement st = connect.createStatement();
-            String getQuery = "SELECT "
-                    + "CUSTOMER.CUSTOMERNAME, CUSTOMER.CSNUMBER,CUSTOMER.CSALTNUMER, "
-                    + "SALE.NAMEOFSP, SALE.SPID, SALE.TIMECALLEDIN, SALE.DATECALLEDIN, SALE.FOLLOWUPCALL,SALE.DOAPPOINTMENT, SALE.SUMMARY,"
-                    + "QUESTIONNAIRE.QUESTION1,QUESTIONNAIRE.QUESTION2,QUESTIONNAIRE.QUESTION3,"
-                    + "store.STORENAME,store.STORENUMBER,store.STORECONTACTPERSON "
-                    + "FROM CUSTOMER JOIN SALE ON CUSTOMER.ID=SALE.ID "
-                    + "JOIN QUESTIONNAIRE ON CUSTOMER.ID=QUESTIONNAIRE.id "
-                    + "JOIN store ON CUSTOMER.ID=store.ID WHERE CUSTOMER.ID = "+rfq;
+            String getQuery = "SELECT * FROM callreport WHERE callreport_id = " + rfq;
+ 
             ResultSet rs = st.executeQuery(getQuery);
             while(rs.next()){
-                cname = rs.getString("CUSTOMERNAME");
-                cnumber = rs.getString("CSNUMBER");
-                calt = rs.getString("CSALTNUMER");
-                spname = rs.getString("NAMEOFSP");
-                spid =Integer.parseInt(rs.getString("SPID"));
-                timecin = rs.getString("TIMECALLEDIN");
-                datecin = rs.getString("DATECALLEDIN");
-                folupcall = rs.getString("FOLLOWUPCALL");
-                doap = rs.getString("DOAPPOINTMENT");
-                summary = rs.getString("SUMMARY");
-                sname = rs.getString("STORENAME");
-                snumber = Integer.parseInt(rs.getString("STORENUMBER"));
-                scperson = rs.getString("STORECONTACTPERSON");
-                ques1 = rs.getString("QUESTION1");
-                ques2 = rs.getString("QUESTION2");
-                ques3 = rs.getString("QUESTION1");
+                cname = rs.getString("customer_name");
+                cnumber = rs.getString("customer_number");
+                calt = rs.getString("customer_alt_number");
+                spname = rs.getString("name_of_sp");
+                spid =Integer.parseInt(rs.getString("sales_person_id"));
+                timecin = rs.getString("timecalled_in");
+                datecin = rs.getString("datecalled_in");
+                folupcall = rs.getString("follow_up_call");
+                doap = rs.getString("date_of_appointment");
+                summary = rs.getString("summary");
+                sname = rs.getString("store_name");
+                snumber = Integer.parseInt(rs.getString("store_number"));
+                scperson = rs.getString("store_contact_person");
+                ques1 = rs.getString("question1");
+                ques2 = rs.getString("question2");
+                ques3 = rs.getString("question3");
+                ques4 = rs.getString("question4");
+                ques5 = rs.getString("question5");
                 
             }
             

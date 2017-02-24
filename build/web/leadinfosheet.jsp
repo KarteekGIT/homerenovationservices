@@ -106,6 +106,9 @@ String year = d.substring(24);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/leadinfosheet.css">
         <link rel="stylesheet" type="text/css" href="css/menubar.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="js/getrfq_lead.js"></script>
+        
     </head>
     <body>
         <div class="menu-items">
@@ -114,7 +117,7 @@ String year = d.substring(24);
         <form action="leadinfosheet.jsp" method="post">
                 <span style="position:absolute; top:44px; right:2px">
                     <label for="input-one" class="float"><strong>Get RFQ</strong></label><br />
-                    <input class="inp-text" name="rfq" id="input-one" type="text" size="30" onchange="getrfq(this.value)" /><br />
+                    <input class="inp-text" name="rfq" id="input-one" type="text" size="30" onchange="getrfq_lead(this.value)" /><br />
                     
                     <label for="input-one" class="float"><strong>Date</strong></label><br />
                     <p><b><span><%= dat %></span>&nbsp;&nbsp;<span><%= year %></span></b></p>
@@ -125,85 +128,85 @@ String year = d.substring(24);
 		<fieldset>
 			<legend>Store Information</legend>
 				<label for="input-one" class="float"><strong>Store Name</strong></label><br />
-				<input class="inp-text" name="store_name" id="input-one" type="text" size="30" /><br />
+				<input class="inp-text" name="store_name" id="store_name" type="text" size="30" /><br />
 
 				<label for="input-two" class="float"><strong>Store Number</strong></label><br />
-				<input class="inp-text" name="store_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="store_number"  id="store_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Department</strong></label><br />
-				<input class="inp-text" name="department"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="department"  id="department" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Email</strong></label><br />
-				<input class="inp-text" name="email"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="email"  id="em" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Primary Contact Name</strong></label><br />
-				<input class="inp-text" name="primary_contact_name"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="primary_contact_name"  id="primary_contact_name" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Primary Contact Number</strong></label><br />
-				<input class="inp-text" name="primary_contact_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="primary_contact_number"  id="primary_contact_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Extension#</strong></label><br />
-				<input class="inp-text" name="extension#"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="extension#"  id="extension" type="text" size="30" />
                                 
-                                <label for="input-two" class="float"><strong>FAX#</strong></label><br />
-				<input class="inp-text" name="fax#"  id="input-two" type="text" size="30" />
+                                <label for="input-two" class="float"><strong>Fax#</strong></label><br />
+				<input class="inp-text" name="fax#"  id="fax#" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Store Address</strong></label><br />
-				<input class="inp-text" name="store_address"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="store_address"  id="store_address" type="text" size="30" />
 		</fieldset>
                 <fieldset>
 			<legend>Customer Information</legend>
                         
                                 <label for="input-two" class="float"><strong>Customer Id</strong></label><br />
-				<input class="inp-text" name="customer_id"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="customer_id"  id="customer_id" type="text" size="30" />
                                 
 				<label for="input-one" class="float"><strong>Customer Name</strong></label><br />
-				<input class="inp-text" name="customer_name" id="input-one" type="text" size="30" /><br />
+				<input class="inp-text" name="customer_name" id="customer_name" type="text" size="30" /><br />
                                 
                                 <label for="input-two" class="float"><strong>Extension#</strong></label><br />
-				<input class="inp-text" name="customer_extension#"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="customer_extension#"  id="customer_extension" type="text" size="30" />
 
 				<label for="input-two" class="float"><strong>Primary Number</strong></label><br />
-				<input class="inp-text" name="customer_primary_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="customer_primary_number"  id="customer_primary_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Alternate Number</strong></label><br />
-				<input class="inp-text" name="customer_alternate_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="customer_alternate_number"  id="customer_alternate_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Address</strong></label><br />
-				<input class="inp-text" name="customer_address"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="customer_address"  id="customer_address" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Type of Dwelling</strong></label><br />
-				<input class="inp-text" name="type_of_dwelling"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="type_of_dwelling"  id="type_of_dwelling" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Single/Semi Detached</strong></label><br />
-				<input class="inp-text" name="single_semi_detached"  id="input-two" type="text" size="30" />                             
+				<input class="inp-text" name="single_semi_detached"  id="single_semi" type="text" size="30" />                             
 		</fieldset>
                 <fieldset>
 			<legend>Site Information</legend>
                         
                                 <label for="input-two" class="float"><strong>Site Id</strong></label><br />
-				<input class="inp-text" name="site_id"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_id"  id="site_identification" type="text" size="30" />
                                 
 				<label for="input-one" class="float"><strong>Contact Name</strong></label><br />
-				<input class="inp-text" name="site_customer_name" id="input-one" type="text" size="30" /><br />
+				<input class="inp-text" name="site_customer_name" id="site_customer_name" type="text" size="30" /><br />
                                 
                                 <label for="input-two" class="float"><strong>Extension#</strong></label><br />
-				<input class="inp-text" name="site_extension#"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_extension#"  id="site_extension" type="text" size="30" />
 
 				<label for="input-two" class="float"><strong>Primary Number</strong></label><br />
-				<input class="inp-text" name="site_primary_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_primary_number"  id="site_primary_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Alternate Number</strong></label><br />
-				<input class="inp-text" name="site_alternate_number"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_alternate_number"  id="site_alternate_number" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Address</strong></label><br />
-				<input class="inp-text" name="site_address"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_address"  id="site_address" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>Town House</strong></label><br />
-				<input class="inp-text" name="site_town_house"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="site_town_house"  id="site_town" type="text" size="30" />
                                 
                                 <label for="input-two" class="float"><strong>High Rise Triplex</strong></label><br />
-				<input class="inp-text" name="high_rise_triplex"  id="input-two" type="text" size="30" />
+				<input class="inp-text" name="high_rise_triplex"  id="high_rise_triplex" type="text" size="30" />
 		</fieldset>
                
 
@@ -211,12 +214,13 @@ String year = d.substring(24);
 		<!-- ============================== Fieldset 3 ============================== -->
 		<fieldset>
 			<legend>Summary/Scope/Notes/Comments</legend>
-			<textarea name="scope" id="message" cols="30" rows="5" title="Note or message"></textarea><br />
+			<textarea name="scope" id="notes" cols="30" rows="5" title="Note or message"></textarea><br />
 		</fieldset>
 		<!-- ============================== Fieldset 3 end ============================== -->
 
 		<p><input class="submit-button" type="submit" name="Submit" value="Update" />
                 <input type="button" onClick="location.href='logout.jsp';" value="Logout" /></p>
+                <span id="setrfq" style="display:none;"></span>
 	</form>
 
     </body>

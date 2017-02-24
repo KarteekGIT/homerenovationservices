@@ -5,8 +5,7 @@
  */
 function getrfq(rf){
     var rfq = rf;
-    var id = 0;
-    //var data;
+
     $.ajax({
         'url':'getrfqapi.jsp',
         'type':'POST',
@@ -56,3 +55,5 @@ function getrfq(rf){
         }
     });
 }
+
+
