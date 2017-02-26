@@ -218,8 +218,8 @@ String year = d.substring(24);
 		</fieldset>
 		<!-- ============================== Fieldset 3 end ============================== -->
 
-		<p><input class="submit-button" type="submit" name="Submit" value="Update" />
-                <input type="button" onClick="location.href='logout.jsp';" value="Logout" /></p>
+		<p><input class="submit-button" type="submit" name="Submit" value="Update" /></p>
+                
                 <span id="setrfq" style="display:none;"></span>
 	</form>
 

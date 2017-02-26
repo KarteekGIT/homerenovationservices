@@ -196,8 +196,8 @@ if(!name.equals( null )) {
                         </fieldset>
                         <!-- ============================== Fieldset 3 end ============================== -->
 
-                        <p><input class="submit-button" type="submit" name="update" value="Update" />
-                            <input type="button" onClick="location.href='logout.jsp';" value="Logout" /></p>
+                        <p><input class="submit-button" type="submit" name="update" value="Update" /></p>
+                            
                 </form>
             <span id="setrfq" style="display:none;"></span>
 

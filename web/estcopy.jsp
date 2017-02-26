@@ -15,7 +15,7 @@
             </head>
             <body>
             <%@include file="menubar.jsp" %>
-                <form action="callreport.jsp" method="post" style="width:645px;">
+                <form action="estcopy.jsp" method="post" style="width:690px;">
                         <!-- ============================== Fieldset 1 ============================== -->
                         <span style="position:absolute; top:44px; right:2px">
                                 <label for="input-one" class="float"><strong>Get RFQ</strong></label><br />
@@ -349,8 +349,8 @@
                                 <input type="checkbox" name="last_estimation" value="declined" />Estimation Declined No Follow Up Required &nbsp;&nbsp;<br />
                         </fieldset>
 
-                        <p><input class="submit-button" type="submit" name="update" value="Update" />
-                            <input type="button" onClick="location.href='logout.jsp';" value="Logout" /></p>
+                        <p><input class="submit-button" type="submit" name="update" value="Update" /></p>
+                            
                 </form>
 
             </body>

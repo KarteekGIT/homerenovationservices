@@ -13,7 +13,7 @@
         fieldset { margin: 0 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
         legend { font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
 
-        label.float { float: left; display: block; width: 100px; margin: 4px 0 0 0; clear: left; }
+        label.float { float: left; display: block; width: 100px; margin: 4px 0 0 0; clear: left; padding-right: 45px; }
         label { display: block; width: auto; margin: 0 0 10px 0;}
         label.spam-protection { display: inline; width: auto; margin: 0; }
         span.msg {background-color: graytext; width:100%; font-size: 22px; }

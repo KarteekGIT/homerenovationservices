@@ -8,6 +8,5 @@ HttpSession newsession = request.getSession(false);
     }
 
    response.sendRedirect("index.jsp");
-   DBConnection.getConnection().close();
    return;
 %>
