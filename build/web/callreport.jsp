@@ -74,6 +74,7 @@ try{
             connect.setAutoCommit(false);
             connect.rollback();
             connect.commit();
+            connect.setAutoCommit(true);
 %>
             <script type="text/javascript">alert("Details not updated successfully");</script>
 <%
